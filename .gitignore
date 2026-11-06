@@ -1,0 +1,8 @@
+node_modules
+.next
+data/*.db
+data/*.db-*
+sample-data/companies-1000.csv
+next-env.d.ts
+*.tsbuildinfo
+.env*.local

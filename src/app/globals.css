@@ -1,0 +1,94 @@
+/*
+  Look: follows HyperNorm's site. Light, cool near-white page (#F8FCFF, the colour their site declares),
+  white cards, deep navy text, one blue accent. Numbers are big and bold with a small label under them,
+  scores sit on a 0-100 gauge with a status word, and sections are numbered 01, 02, 03.
+  To change the brand colour, change --accent below. That is the only place.
+*/
+:root {
+  color-scheme: light;
+  --bg: #f8fcff; --card: #ffffff; --ink: #0b1f3a; --muted: #5b6b82; --line: #dce6f2; --soft: #eef4fb;
+  --accent: #2457f5; --accent-ink: #ffffff; --accent-soft: #e8efff;
+  --good: #14804a; --warn: #b26a00; --bad: #c0362c;
+  --good-bg: #e4f5ec; --warn-bg: #fff1d9; --bad-bg: #fde9e7;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 15px/1.55 "Inter", system-ui, -apple-system, "Segoe UI", sans-serif; -webkit-font-smoothing: antialiased; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.top { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 24px; background: rgba(255,255,255,.85); backdrop-filter: blur(6px); border-bottom: 1px solid var(--line); position: sticky; top: 0; z-index: 5; }
+.brand { font-weight: 700; font-size: 17px; color: var(--ink); letter-spacing: -.01em; display: inline-flex; align-items: center; gap: 9px; }
+.brand::before { content: ""; width: 14px; height: 14px; border-radius: 4px; background: linear-gradient(135deg, var(--accent), #6fa0ff); }
+.step { color: var(--muted); font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; background: var(--soft); border-radius: 99px; padding: 4px 12px; }
+main { max-width: 1080px; margin: 0 auto; padding: 28px 16px 72px; }
+h1 { font-size: 28px; letter-spacing: -.02em; margin: 0 0 4px; } h2 { font-size: 18px; letter-spacing: -.01em; margin: 0 0 12px; display: flex; align-items: center; gap: 10px; }
+.num { font-size: 12px; font-weight: 700; color: var(--accent); background: var(--accent-soft); border-radius: 8px; padding: 2px 8px; letter-spacing: .04em; }
+.sub { color: var(--muted); margin: 0 0 22px; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 22px; margin-bottom: 18px; box-shadow: 0 1px 2px rgba(11,31,58,.04), 0 6px 20px rgba(11,31,58,.04); }
+.grid { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+label { display: block; font-weight: 600; font-size: 13px; margin-bottom: 4px; }
+.hint { font-weight: 400; color: var(--muted); }
+input[type=text], input[type=number], input[type=search], textarea, select {
+  width: 100%; padding: 9px 11px; border: 1px solid var(--line); border-radius: 10px; background: #fff; color: var(--ink); font: inherit;
+}
+input:focus, textarea:focus, select:focus { outline: 2px solid var(--accent-soft); border-color: var(--accent); }
+textarea { min-height: 70px; resize: vertical; }
+.check { display: flex; align-items: center; gap: 8px; font-weight: 500; }
+.check input { width: 18px; height: 18px; accent-color: var(--accent); }
+button, .btn { display: inline-block; padding: 9px 16px; border-radius: 10px; border: 1px solid var(--accent); background: var(--accent); color: var(--accent-ink); font: inherit; font-weight: 600; cursor: pointer; }
+button:hover, .btn:hover { filter: brightness(1.06); text-decoration: none; }
+button.ghost, .btn.ghost { background: #fff; color: var(--accent); }
+button:disabled { opacity: .5; cursor: not-allowed; }
+.errors { background: var(--bad-bg); color: var(--bad); border-radius: 10px; padding: 10px 14px; margin: 12px 0; }
+.errors ul { margin: 0; padding-left: 18px; }
+.ok { background: var(--good-bg); color: var(--good); border-radius: 10px; padding: 10px 14px; margin: 12px 0; font-weight: 600; }
+.ok::before { content: "✓ "; }
+.stats { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); margin-bottom: 18px; }
+.stat { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; box-shadow: 0 1px 2px rgba(11,31,58,.04); }
+.stat b { display: block; font-size: 30px; line-height: 1.1; letter-spacing: -.02em; } .stat span { color: var(--muted); font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; }
+table { width: 100%; border-collapse: collapse; }
+th, td { text-align: left; padding: 11px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-size: 11px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+tbody tr:hover { background: var(--soft); }
+.tablewrap { overflow-x: auto; }
+.pill { display: inline-block; padding: 2px 10px; border-radius: 99px; font-size: 12px; font-weight: 700; }
+.pill.High { background: var(--good-bg); color: var(--good); } .pill.Medium { background: var(--warn-bg); color: var(--warn); } .pill.Low { background: var(--bad-bg); color: var(--bad); }
+.muted { color: var(--muted); } .small { font-size: 13px; }
+.row { display: flex; flex-wrap: wrap; gap: 10px; align-items: end; }
+.row > * { flex: 1 1 160px; } .row > button, .row > .btn { flex: 0 0 auto; }
+.pager { display: flex; gap: 12px; align-items: center; justify-content: center; margin-top: 14px; }
+.next { border-left: 4px solid var(--accent); }
+@media (max-width: 600px) { h1 { font-size: 23px; } .step { display: none; } }
+.bar { height: 8px; background: var(--soft); border-radius: 99px; overflow: hidden; }
+.barfill { height: 100%; background: linear-gradient(90deg, var(--accent), #6fa0ff); border-radius: 99px; transition: width .4s; }
+.vpill { display: inline-block; padding: 0 8px; border-radius: 99px; font-size: 11px; font-weight: 700; }
+.vpill.valid { background: var(--good-bg); color: var(--good); } .vpill.risky { background: var(--warn-bg); color: var(--warn); } .vpill.invalid { background: var(--bad-bg); color: var(--bad); }
+.emails { margin-top: 6px; } .emails summary { cursor: pointer; color: var(--accent); font-size: 12px; }
+.erow { padding: 6px 0; border-top: 1px solid var(--line); margin-top: 6px; }
+.kind { font-size: 11px; color: var(--muted); border: 1px solid var(--line); border-radius: 99px; padding: 0 7px; background: #fff; }
+.addform { display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap; }
+.addform input { flex: 1 1 140px; padding: 5px 8px; font-size: 12px; }
+.addform button { padding: 5px 12px; font-size: 12px; }
+.sec { font-size: 13px; margin: 16px 0 8px; color: var(--muted); font-weight: 700; text-transform: uppercase; letter-spacing: .06em; }
+.cand { align-items: flex-start; padding: 6px 0; border-top: 1px solid var(--line); }
+.cand input { margin-top: 3px; flex: 0 0 auto; }
+.draft { border: 1px solid var(--line); border-radius: 16px; padding: 16px; margin-bottom: 14px; background: var(--card); box-shadow: 0 1px 2px rgba(11,31,58,.04); }
+.draft textarea { min-height: 220px; font-family: inherit; line-height: 1.5; }
+.draft .why { background: var(--soft); border-radius: 10px; padding: 9px 12px; margin: 8px 0; }
+.tabs { display: flex; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
+.tabs a { padding: 6px 14px; border-radius: 99px; border: 1px solid var(--line); color: var(--ink); background: #fff; font-weight: 600; font-size: 13px; }
+.tabs a.on { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); text-decoration: none; }
+.actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+button.good { background: var(--good); border-color: var(--good); color: #fff; }
+button.bad { background: #fff; border-color: var(--bad); color: var(--bad); }
+
+/* Numbers, the HyperNorm way: a bold figure, a small label, and a 0-100 gauge with a status word. */
+.score { font-size: 22px; font-weight: 700; letter-spacing: -.02em; }
+.gauge { position: relative; height: 6px; width: 96px; background: var(--soft); border-radius: 99px; margin-top: 5px; overflow: hidden; }
+.gauge i { display: block; height: 100%; border-radius: 99px; background: var(--accent); }
+.gauge.High i { background: var(--good); } .gauge.Medium i { background: var(--warn); } .gauge.Low i { background: var(--bad); }
+.gauge::after { content: ""; position: absolute; inset: 0; background-image: repeating-linear-gradient(90deg, transparent 0, transparent calc(25% - 1px), #fff calc(25% - 1px), #fff 25%); }
+.bigfig { font-size: 26px; font-weight: 700; letter-spacing: -.02em; line-height: 1.1; }
+.arrow { color: var(--muted); font-weight: 600; }
+.tick { color: var(--good); font-weight: 700; }
+.master { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; }
+.demo-banner { background: var(--accent-soft); color: var(--ink); text-align: center; font-size: 13px; padding: 8px 16px; border-bottom: 1px solid var(--line); }

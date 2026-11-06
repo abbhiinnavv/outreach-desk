@@ -1,0 +1,13 @@
+# One-click deploy on Render (free plan). Connect this repo and choose "Blueprint".
+services:
+  - type: web
+    name: outreach-desk
+    runtime: node
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm run seed && npm start
+    envVars:
+      - key: NODE_VERSION
+        value: 22
+      - key: DEMO_MODE
+        value: "1"
